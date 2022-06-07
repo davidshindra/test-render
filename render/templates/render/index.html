@@ -1,0 +1,16 @@
+{% extends '../base.html' %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href={% static 'main.css' %}>
+    <title>Render index page</title>
+{% endblock head %}
+
+{% block content %}
+    <h1>Render Works!!!</h1>
+    <h2>Messages</h2>
+    {% for message in messages %}
+        <h3>{{ message.content }}</h3>
+    {% endfor %}
+{% endblock content %}
