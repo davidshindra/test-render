@@ -1,0 +1,22 @@
+databases:
+  - name: test_render_db
+    databaseName: test_render_db
+    user: test
+
+services:
+  - type: web
+    name: test_render
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn mysite.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: test_render_db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: ENVIRONMENT
+        value: "production"
